@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:veda_learn/view/login_screen.dart';
+import 'package:veda_learn/view/register_welcome_screen.dart';
 import 'package:veda_learn/view/splash_screen.dart';
 
 
@@ -8,6 +9,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginScreen());
+    return MaterialApp(home: RegisterWelcomePage());
   }
 }
