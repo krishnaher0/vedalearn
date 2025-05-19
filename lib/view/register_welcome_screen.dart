@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RegisterWelcomePage extends StatelessWidget {
-  const RegisterWelcomePage({super.key});
+class RegisterWelcomeScreen extends StatelessWidget {
+  const RegisterWelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,9 @@ class RegisterWelcomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.blue,
                   backgroundColor: Colors.white,
@@ -68,7 +70,9 @@ class RegisterWelcomePage extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/agePage');
+                },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 child: Text(
                   'Next',

@@ -33,7 +33,7 @@ class NameScreen extends StatelessWidget {
               width: double.infinity,
               child: TextField(
                 controller: controller,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.name,
                 autofocus: true, // Keyboard shows up automatically
                 decoration: const InputDecoration(
                   contentPadding: EdgeInsets.symmetric(
