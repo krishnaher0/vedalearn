@@ -5,8 +5,12 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Image.asset("assets/images/dashboard1.png"),
+      body: SizedBox(
+        width: size.width * 1,
+        child: Image.asset("assets/images/dashboard1.png", fit: BoxFit.fill),
+      ),
     );
   }
 }
