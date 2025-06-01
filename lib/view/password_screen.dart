@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:veda_learn/view/email_screen.dart';
-import 'package:veda_learn/view/login_screen.dart';
 
 
 class PasswordScreen extends StatelessWidget {

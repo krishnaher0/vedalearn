@@ -6,7 +6,6 @@ import 'package:veda_learn/view/login_screen.dart';
 import 'package:veda_learn/view/name_screen.dart';
 import 'package:veda_learn/view/password_screen.dart';
 import 'package:veda_learn/view/register_welcome_screen.dart';
-import 'package:veda_learn/view/splash_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,7 +15,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => const DashboardScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterWelcomeScreen(),
         '/agePage': (context) => const AgeScreen(),
