@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:veda_learn/theme/theme_data.dart';
 import 'package:veda_learn/view/age_screen.dart';
 import 'package:veda_learn/view/dashboard_screen.dart';
 import 'package:veda_learn/view/email_screen.dart';
@@ -6,6 +7,7 @@ import 'package:veda_learn/view/login_screen.dart';
 import 'package:veda_learn/view/name_screen.dart';
 import 'package:veda_learn/view/password_screen.dart';
 import 'package:veda_learn/view/register_welcome_screen.dart';
+import 'package:veda_learn/view/splash_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,16 +15,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: getThemeData(),
+
       initialRoute: '/',
       routes: {
-        '/': (context) => const DashboardScreen(),
+        '/': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterWelcomeScreen(),
         '/agePage': (context) => const AgeScreen(),
         '/namePage': (context) => const NameScreen(),
         '/emailPage': (context) => const EmailScreen(),
         '/password': (context) => PasswordScreen(),
-        '/dashboard': (context) => DashboardScreen()
+        '/dashboard': (context) => DashboardScreen(),
       },
     );
   }
