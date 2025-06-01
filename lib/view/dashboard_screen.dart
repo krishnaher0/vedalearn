@@ -86,15 +86,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Card(
                               elevation: 5,
                               color: Colors.green,
                               child: Padding(
-                                padding: EdgeInsetsGeometry.all(8.0),
+                                padding: EdgeInsetsGeometry.all(12.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -115,7 +115,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           "7 level",
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 14,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -130,7 +130,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       "5k active participation",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 12,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w200,
                                       ),
                                     ),
@@ -161,7 +161,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           "5 level",
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 14,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -173,7 +173,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       "5k active participation",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 12,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w200,
                                       ),
                                     ),
