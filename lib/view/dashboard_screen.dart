@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _selectedIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.blue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(vertical: 20),
+          padding: EdgeInsetsGeometry.only(top: 20),
           child: Column(
             children: [
               Row(
@@ -57,8 +65,14 @@ class DashboardScreen extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
+                  constraints: BoxConstraints(
+                    minHeight: 1 * size.height,
+                    minWidth: size.width,
+                  ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                     color: Colors.white,
                   ),
                   child: Column(
@@ -74,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Card(
                               elevation: 5,
@@ -88,11 +102,14 @@ class DashboardScreen extends StatelessWidget {
                                       "Sanskrit",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 14,
+                                        fontSize: 24,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+
                                       children: [
                                         Text(
                                           "7 level",
@@ -102,7 +119,11 @@ class DashboardScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        Icon(Icons.play_arrow),
+
+                                        const SizedBox(width: 20),
+                                        
+
+                                        Icon(Icons.play_arrow, size: 60,color: Colors.blue,fill: 0,),
                                       ],
                                     ),
                                     Text(
@@ -118,6 +139,7 @@ class DashboardScreen extends StatelessWidget {
                               ),
                             ),
                             Card(
+                              
                               elevation: 5,
                               color: Colors.green,
                               child: Padding(
@@ -129,7 +151,7 @@ class DashboardScreen extends StatelessWidget {
                                       "Nepali",
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 14,
+                                        fontSize: 24,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -143,7 +165,8 @@ class DashboardScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        Icon(Icons.play_arrow),
+                                        const SizedBox(width: 20),
+                                        Icon(Icons.play_arrow, size: 60,color: Colors.blue,),
                                       ],
                                     ),
                                     Text(
@@ -161,76 +184,143 @@ class DashboardScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          
-                          child: Image.asset("assets/images/nepali.png"),
-                        ),
-                        title: Text("Nepali"),
-                        subtitle: LinearProgressIndicator(
-                          value: 0.8,
-                          minHeight: 6,
-                          color: Colors.blue,
-                        ),
-                        
-                        trailing: SizedBox(
-                          height: 100,
-                          child: Padding(padding: EdgeInsetsGeometry.fromLTRB(0, 30, 0, 0), child: Text("60%"),),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
 
-                        ),
-                      ),
-                      ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          
-                          child: Image.asset("assets/images/nepali.png"),
-                        ),
-                        title: Text("Nepali"),
-                        subtitle: LinearProgressIndicator(
-                          value: 0.8,
-                          minHeight: 6,
-                          color: Colors.blue,
-                        ),
-                        
-                        trailing: SizedBox(
-                          height: 100,
-                          child: Padding(padding: EdgeInsetsGeometry.fromLTRB(0, 30, 0, 0), child: Text("60%"),),
+                              child: Image.asset(
+                                "assets/images/nepali.png",
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            title: Text("Nepali"),
+                            subtitle: LinearProgressIndicator(
+                              value: 0.8,
+                              minHeight: 6,
+                              color: Colors.blue,
+                            ),
 
+                            trailing: SizedBox(
+                              height: 100,
+                              child: Padding(
+                                padding: EdgeInsetsGeometry.fromLTRB(
+                                  0,
+                                  30,
+                                  0,
+                                  0,
+                                ),
+                                child: Text("80%"),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          
-                          child: Image.asset("assets/images/nepali.png"),
-                        ),
-                        title: Text("Nepali"),
-                        subtitle: LinearProgressIndicator(
-                          value: 0.8,
-                          minHeight: 6,
-                          color: Colors.blue,
-                        ),
-                        
-                        trailing: SizedBox(
-                          height: 100,
-                          child: Padding(padding: EdgeInsetsGeometry.fromLTRB(0, 30, 0, 0), child: Text("60%"),),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
 
+                              child: Image.asset(
+                                "assets/images/sanskrit.png",
+                                fit: BoxFit.fill,
+                                width: 60,
+                                height: 60,
+                              ),
+                            ),
+                            title: Text("Sanskrit"),
+                            subtitle: LinearProgressIndicator(
+                              value: 0.3,
+                              minHeight: 6,
+                              color: Colors.blue,
+                            ),
+
+                            trailing: SizedBox(
+                              height: 100,
+                              child: Padding(
+                                padding: EdgeInsetsGeometry.fromLTRB(
+                                  0,
+                                  30,
+                                  0,
+                                  0,
+                                ),
+                                child: Text("30%"),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      Container(
-                        height: 20,
-                        width: double.infinity,
-                        color: Colors.red,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              // backgroundColor: Colors.white,
+                              radius: 30,
+
+                              child: Image.asset(
+                                "assets/images/newari.png",
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            title: Text("Newari"),
+                            subtitle: LinearProgressIndicator(
+                              value: 0.1,
+                              minHeight: 6,
+                              color: Colors.blue,
+                            ),
+
+                            trailing: SizedBox(
+                              height: 100,
+                              child: Padding(
+                                padding: EdgeInsetsGeometry.fromLTRB(
+                                  0,
+                                  30,
+                                  0,
+                                  0,
+                                ),
+                                child: Text("10%"),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
-                       bottomNavigationBar: NavigationBar(
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
- 
+
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
@@ -238,26 +328,18 @@ class DashboardScreen extends StatelessWidget {
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.message_outlined),
-            label: "Chat",
+            icon: Icon(Icons.search),
+            label: "Search",
           ),
           NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            label: "Favourite",
+            icon: Icon(Icons.emoji_events),
+            label: "Achievement",
           ),
           NavigationDestination(
             icon: Icon(Icons.people_outline),
             label: "Profile",
           ),
- 
-                    ],
-                  ),
-                ),
-              ),
-          
-          ),
-            ]
-        ),
+        ],
       ),
     );
   }
