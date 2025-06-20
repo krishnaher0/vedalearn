@@ -16,7 +16,9 @@ class PasswordScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 48),
         child: BlocListener<RegisterViewmodel, RegisterState>(
           listenWhen: (previous, current) {
-            return previous.emailFormStatus != current.emailFormStatus;
+            return previous.emailFormStatus != current.emailFormStatus &&
+                (current.emailFormStatus == EmailFormStatus.failure ||
+                    current.emailFormStatus == EmailFormStatus.success);
           },
           listener: (context, state) {
             if (state.emailFormStatus == EmailFormStatus.failure) {
