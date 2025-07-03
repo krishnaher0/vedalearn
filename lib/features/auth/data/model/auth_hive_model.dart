@@ -44,16 +44,16 @@ class AuthHiveModel extends Equatable {
   }
  
   // From Hive Model to Entity
-  UserEntity toEntity() {
-    return UserEntity(
-       id: id,
-      email: email,
-      name: name,
-      password: password, 
-      age: age
+  // UserEntity toEntity() {
+  //   return UserEntity(
+  //      id: id,
+  //     email: email,
+  //     name: name,
+  //     password: password, 
+  //     age: age
       
-    );
-  }
+  //   );
+  // }
  
   @override
   List<Object?> get props => [

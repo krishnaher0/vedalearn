@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset("assets/images/login.png")),
+                Center(child: Image.asset("assets/images/vedlogo")),
                 const SizedBox(height: 20),
                 const Text(
                   "Input your email",
