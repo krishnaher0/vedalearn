@@ -27,11 +27,13 @@ class LoginViewModel extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onLoginSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
-    final email = state.email;
-    final password = state.password;
+    final email = event.email;
+    final password = event.password;
 
     emit(
       state.copyWith(
+        email: event.email,
+        password: event.password,
         formStatus: FormStatus.submitting,
         message: 'Submission Under Process',
       ),
