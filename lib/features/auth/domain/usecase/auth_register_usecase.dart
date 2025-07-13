@@ -27,7 +27,7 @@ class AuthRegisterParams extends Equatable {
   });
  
   @override
-  List<Object?> get props => [email, name, password];
+  List<Object?> get props => [email, name, password, age];
 }
  
  
