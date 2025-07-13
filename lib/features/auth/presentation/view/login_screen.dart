@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset("assets/images/vedlogo")),
+                Center(child: Image.asset("assets/logo/vedlogo.png")),
                 const SizedBox(height: 20),
                 const Text(
                   "Input your email",
@@ -112,7 +112,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            bloc.add(LoginSubmitted(state.email, state.password));
+                            bloc.add(
+                              LoginSubmitted(state.email, state.password),
+                            );
                           }
                         },
                         child: const Text(
@@ -126,6 +128,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 Center(
                   child: ElevatedButton.icon(
+                    key: const ValueKey('google_login_btn'),
                     onPressed: () {},
                     icon: Image.asset("assets/logo/google.png", height: 24),
                     label: const Text("Login with Google"),
@@ -137,6 +140,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const Text("Don't have an account? "),
                     GestureDetector(
+                      key: const Key('register_button'),
                       onTap: () => Navigator.pushNamed(context, '/register'),
                       child: const Text(
                         "Register",
