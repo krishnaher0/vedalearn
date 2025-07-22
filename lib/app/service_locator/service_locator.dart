@@ -74,11 +74,15 @@ import 'package:veda_learn/features/auth/domain/usecase/auth_register_usecase.da
 import 'package:veda_learn/features/auth/presentation/view_model/login_view_model/login_viewmodel.dart';
 import 'package:veda_learn/features/auth/presentation/view_model/register_view_model/register_viewmodel.dart';
 
+
+//course
 // Course feature
 import 'package:veda_learn/features/course/data/datasource/remote_datasource/course_remote_datasource.dart';
 import 'package:veda_learn/features/course/data/repository/remote_repository/course_remote_repository.dart';
 import 'package:veda_learn/features/course/domain/usecase/get_all_course_usecase.dart';
+import 'package:veda_learn/features/course/domain/repository/course_repository.dart';
 import 'package:veda_learn/features/course/presentation/view_model/course_view_model.dart';
+
 
 final serviceLocator = GetIt.instance;
 
@@ -86,7 +90,7 @@ Future<void> initDependencies() async {
   _initApiService();
   _initHiveService();
   _initAuthModule();
-  // _initCourseModule();
+  _initCourseModule();
 }
 
 void _initApiService() {
@@ -133,18 +137,21 @@ void _initCourseModule() {
     () => CourseRemoteDataSource(apiService: serviceLocator<ApiService>()),
   );
 
-  // Repository (register implementation as interface)
+  // Repository
+ // Repository (register the interface, not the class directly)
   serviceLocator.registerFactory<ICourseRepository>(
-    () => CourseRepositoryImpl(remoteDataSource: serviceLocator<CourseRemoteDataSource>()),
+    () => CourseRemoteRepository(remoteDataSource: serviceLocator<CourseRemoteDataSource>()),
   );
 
-  // Use case
+  // Use Case
   serviceLocator.registerFactory<GetAllCoursesUseCase>(
     () => GetAllCoursesUseCase(repository: serviceLocator<ICourseRepository>()),
   );
-
   // ViewModel
-  serviceLocator.registerFactory<CourseViewModel>(
-    () => CourseViewModel(getAllCoursesUseCase: serviceLocator<GetAllCoursesUseCase>()),
-  );
+ serviceLocator.registerFactory<CourseViewModel>(
+  () => CourseViewModel(getAllCoursesUseCase: serviceLocator<GetAllCoursesUseCase>()),
+);
+
 }
+
+
