@@ -23,13 +23,17 @@ class AuthHiveModel extends Equatable {
 
   @HiveField(4)
   final int? age;
+
+  @HiveField(5) // 
+  final String? token;
  
   AuthHiveModel({
     String? id,
     required this.email,
     required this.name,
     required this.password,
-    required this.age
+    required this.age,
+    required this.token
   }) : id = id ?? const Uuid().v4();
  
   // From Entity to Hive Model
@@ -39,7 +43,8 @@ class AuthHiveModel extends Equatable {
       email: entity.email,
       name: entity.name,
       password: entity.password, 
-      age: entity.age
+      age: entity.age,
+      token:entity.token
     );
   }
  
@@ -61,7 +66,8 @@ class AuthHiveModel extends Equatable {
     email,
     name,
     password,
-    age
+    age,
+    token
   ];
 }
  
