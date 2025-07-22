@@ -32,5 +32,16 @@ class HiveService {
     box.close();
     return user;
   }
+
+   Future<String?> getToken() async {
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.userBox);
+    if (box.isEmpty) return null;
+
+    final auth = box.values.first;
+    await box.close();
+    return auth.token;
+  }
 }
+
+
  
