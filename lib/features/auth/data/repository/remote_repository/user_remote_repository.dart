@@ -12,17 +12,21 @@ class UserRemoteRepository implements IAuthRepository {
   UserRemoteRepository({required UserRemoteDataSource userRemoteDataSource})
     : _userRemoteDataSource = userRemoteDataSource;
   @override
-  Future<Either<Failure, String>> loginToAccount(
-    String email,
-    String password,
-  ) async {
-    try {
-      final token = await _userRemoteDataSource.loginToAccount(email, password);
-      return Right(token);
-    } catch (e) {
-      return Left(ApiFailure(message: e.toString()));
-    }
+Future<Either<Failure, UserEntity>> loginToAccount(
+  String email,
+  String password,
+) async {
+  try {
+    // Call remote data source that now returns UserEntity directly
+    final UserEntity user = await _userRemoteDataSource.loginToAccount(email, password);
+   
+
+    return Right(user);
+  } catch (e) {
+    return Left(ApiFailure(message: e.toString()));
   }
+}
+
  
   @override
   Future<Either<Failure, void>> createAccount(UserEntity user) async {

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:veda_learn/features/auth/domain/entity/user_entity.dart';
  
 enum FormStatus {
   initial,
@@ -14,6 +15,8 @@ class LoginState extends Equatable {
   final bool obscurePassword;
   final FormStatus formStatus;
   final String? message;
+  final UserEntity? user;
+  
  
   const LoginState({
     this.email = '',
@@ -21,7 +24,8 @@ class LoginState extends Equatable {
     this.rememberMe = false,
     this.obscurePassword = true,
     this.formStatus = FormStatus.initial,
-    this.message
+    this.message,
+    this.user
   });
  
   LoginState copyWith({
@@ -30,7 +34,8 @@ class LoginState extends Equatable {
     bool? rememberMe,
     bool? obscurePassword,
     FormStatus? formStatus,
-    String? message
+    String? message,
+    UserEntity? user
   }) {
     return LoginState(
       email: email ?? this.email,
@@ -38,7 +43,8 @@ class LoginState extends Equatable {
       rememberMe: rememberMe ?? this.rememberMe,
       obscurePassword: obscurePassword ?? this.obscurePassword,
       formStatus: formStatus ?? this.formStatus,
-      message: message ?? this.message
+      message: message ?? this.message,
+      user: user ?? this.user,
     );
   }
  
@@ -49,6 +55,7 @@ class LoginState extends Equatable {
     rememberMe,
     obscurePassword,
     formStatus,
-    message
+    message,
+    user
   ];
 }

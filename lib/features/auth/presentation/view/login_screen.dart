@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:veda_learn/app/service_locator/service_locator.dart';
+import 'package:veda_learn/app/shared_pref/secure_storage_service.dart';
 import 'package:veda_learn/features/auth/presentation/view_model/login_view_model/login_event.dart';
 import 'package:veda_learn/features/auth/presentation/view_model/login_view_model/login_state.dart';
 import 'package:veda_learn/features/auth/presentation/view_model/login_view_model/login_viewmodel.dart';
@@ -13,27 +16,43 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<LoginViewModel>();
+
     return Scaffold(
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 38, vertical: 50),
           child: BlocListener<LoginViewModel, LoginState>(
-            listenWhen: (previous, current) {
-              return previous.formStatus != current.formStatus;
-            },
-            listener: (context, state) {
+            listenWhen: (previous, current) =>
+                previous.formStatus != current.formStatus,
+            listener: (context, state) async {
               if (state.formStatus == FormStatus.failure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message ?? 'Login Failed..')),
                 );
               } else if (state.formStatus == FormStatus.success) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.message ?? 'Login Successful..'),
-                  ),
+                  SnackBar(content: Text(state.message ?? 'Login Successful..')),
                 );
-                Navigator.pushNamed(context, '/dashboard');
+
+                // ✅ Store user data in secure storage
+                final storage = serviceLocator<SecureStorageService>();
+               await storage.saveUserData(
+  token: state.user?.token ?? '',
+  role: state.user?.role ?? 'member',
+  id: state.user?.id ?? '',
+  name: state.user?.name ?? '',
+  email: state.user?.email ?? '',
+);
+
+                if (!context.mounted) return;
+
+                // ✅ Navigate based on role
+                if (state.user?.role== 'admin') {
+                  Navigator.pushReplacementNamed(context, '/admin-dashboard');
+                } else {
+                  Navigator.pushReplacementNamed(context, '/dashboard');
+                }
               }
             },
             child: Column(
@@ -83,6 +102,7 @@ class LoginScreen extends StatelessWidget {
                     }
                     return null;
                   },
+                  obscureText: true,
                   decoration: InputDecoration(
                     hintText: "********",
                     border: OutlineInputBorder(
@@ -129,7 +149,9 @@ class LoginScreen extends StatelessWidget {
                 Center(
                   child: ElevatedButton.icon(
                     key: const ValueKey('google_login_btn'),
-                    onPressed: () {},
+                    onPressed: () {
+                      // TODO: Google Sign-in Logic
+                    },
                     icon: Image.asset("assets/logo/google.png", height: 24),
                     label: const Text("Login with Google"),
                   ),
