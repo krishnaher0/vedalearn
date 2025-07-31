@@ -14,3 +14,4 @@ class GetAllCoursesUseCase implements UseCaseWithoutParams<List<CourseEntity>> {
     return repository.getAllCourses();
   }
 }
+

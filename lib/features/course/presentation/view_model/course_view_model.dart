@@ -1,39 +1,38 @@
-import 'package:flutter/material.dart';
-import 'package:veda_learn/features/course/domain/entity/course_entity.dart';
-import 'package:veda_learn/features/course/domain/usecase/get_all_course_usecase.dart';
-import 'package:veda_learn/core/error/failure.dart';
+// lib/features/course/presentation/view_model/course_view_model.dart
 
-class CourseViewModel extends ChangeNotifier {
+import 'package:veda_learn/features/course/domain/usecase/get_all_course_usecase.dart';
+import 'package:veda_learn/features/course/presentation/view_model/course_event.dart';
+import 'package:veda_learn/features/course/domain/entity/course_entity.dart';
+import 'package:veda_learn/features/course/presentation/view_model/course_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class CourseViewModel extends Bloc<CourseEvent, CourseState> {
   final GetAllCoursesUseCase getAllCoursesUseCase;
 
-  CourseViewModel({required this.getAllCoursesUseCase});
+  CourseViewModel({
+    required this.getAllCoursesUseCase,
+  }) : super(const CourseState()) {
+    on<FetchCourses>(_onFetchCourses);
+  }
 
-  List<CourseEntity> _courses = [];
-  List<CourseEntity> get courses => _courses;
+  void fetchCourses() => add(FetchCourses());
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  bool get isAllCoursesLoading => state.allCoursesStatus == CourseStatus.loading;
+  bool get isAllCoursesSuccess => state.allCoursesStatus == CourseStatus.success;
+  bool get isAllCoursesFailure => state.allCoursesStatus == CourseStatus.failure;
 
-  String? _error;
-  String? get error => _error;
+  String? get error => state.error;
 
-  Future<void> fetchCourses() async {
-    _isLoading = true;
-    _error = null;
-    notifyListeners();
+  List<CourseEntity> get allCourses => state.allCourses;
 
-    final result = await getAllCoursesUseCase();
+  void _onFetchCourses(FetchCourses event, Emitter<CourseState> emit) async {
+    emit(state.copyWith(allCoursesStatus: CourseStatus.loading, error: null));
+    // getAllCoursesUseCase is a UseCaseWithoutParams, so it needs NoParams()
+    final result = await getAllCoursesUseCase(); // <-- NoParams comes from usecase.dart
 
     result.fold(
-      (Failure failure) {
-        _error = failure.message;
-      },
-      (List<CourseEntity> data) {
-        _courses = data;
-      },
+      (failure) => emit(state.copyWith(allCoursesStatus: CourseStatus.failure, error: failure.message)),
+      (courses) => emit(state.copyWith(allCoursesStatus: CourseStatus.success, allCourses: courses)),
     );
-
-    _isLoading = false;
-    notifyListeners();
   }
 }
